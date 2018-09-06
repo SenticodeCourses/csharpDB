@@ -19,27 +19,27 @@ namespace ConsoleApp1
 
             var conn = new SQLiteConnection();
 
-            string FileData = @"d:\super\newbd.db";
+            string FileData = @"d:\super\study.db"; // физический путь к базе данных, меняем его на свой
             conn.ConnectionString = @"Data Source=" + FileData + ";New=True;Version=3";
             conn.Open();
             DbCommand comm = conn.CreateCommand();
-            comm.CommandText = @"SELECT  idOapsPanel, Description,  ipAddr1, ipAddr2, idType 
-                                 FROM tblOAPSPanel ";
+            comm.CommandText = @"SELECT  StudentId, FName, Email, Phone
+                                 FROM Students ";
 
             var reader = comm.ExecuteReader();
 
             while (reader.Read())
             {
-                if (!reader.IsDBNull(0))
-                    Console.WriteLine((short)reader.GetInt32(0));
+                //if (!reader.IsDBNull(0))
+                //    Console.WriteLine((short)reader.GetInt32(0)); // StudentId
                 if (!reader.IsDBNull(1))
-                    Console.WriteLine(reader.GetString(1).Trim());
+                    Console.WriteLine(reader.GetString(1).Trim()); // FName
                 if (!reader.IsDBNull(2))
-                    Console.WriteLine(reader.GetString(2).Trim());
+                    Console.WriteLine(reader.GetString(2).Trim()); // LName
                 if (!reader.IsDBNull(3))
-                    Console.WriteLine(reader.GetString(3).Trim());
+                    Console.WriteLine(reader.GetString(3).Trim()); // Email
                 if (!reader.IsDBNull(4))
-                    Console.WriteLine((byte)reader.GetInt32(4));
+                    Console.WriteLine(reader.GetString(4).Trim()); // Phone
 
             }
             reader.Close();
